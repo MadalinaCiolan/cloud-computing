@@ -1,19 +1,23 @@
 // 1. Import libraries
 const express = require('express')
-// const {restart} = require('nodemon') 
 const app = express()
 
 const mongoose = require('mongoose')
-//const bodyParser = require('body-parser')
-//require('dotenv/config')
-
-
+const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const postsRoute = require('./routes/posts')
+const commentsRoute = require('./routes/comments')
+const likesRoute = require('./routes/likes')
+const dislikesRoute = require('./routes/dislikes')
 //const userRoute = require('./routes/user')
 
 // 2. Middleware
+app.use(bodyParser.json())
 app.use('/posts', postsRoute)
+app.use('/comments', commentsRoute)
+app.use('/likes', likesRoute)
+app.use('/dislikes', dislikesRoute)
 //app.use('/user',userRoute)
 
 // 3. Create a route
