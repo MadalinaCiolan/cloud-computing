@@ -1,6 +1,7 @@
 const { number } = require('joi')
 const mongoose = require('mongoose')
 
+// We use the mongoose feature to automatically add creation and update timestamps to documents
 const PostSchema = mongoose.Schema({
     post_title:{
         type: String,
@@ -8,10 +9,6 @@ const PostSchema = mongoose.Schema({
     },
     topic_id:{
         type: String,
-        required: true
-    },
-    post_time_stamp:{
-        type: Date,
         required: true
     },
     post_text:{
@@ -22,18 +19,12 @@ const PostSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    post_status:{
-        type: String,
-        required: true
-    },
     post_owner_id:{
         type: String,
         required: true        
-    },
-    date:{
-        type: Date,
-        default: Date.now
     }
+},
+{timestamps: {createdAt: "post_creation_ts", updatedAt: "post_update_ts"}
 })
 
 module.exports = mongoose.model('posts',PostSchema)

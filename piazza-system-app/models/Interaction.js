@@ -16,11 +16,10 @@ const InteractionSchema = mongoose.Schema({
     comment_id:{
         type: String,
         required: false
-    },
-    date:{
-        type: Date,
-        default: Date.now
     }
-})
+}, {
+    timestamps: {createdAt: "interaction_creation_ts", updatedAt: "interaction_update_ts"}
+}
+)
 
 module.exports = mongoose.model('interactions',InteractionSchema)
