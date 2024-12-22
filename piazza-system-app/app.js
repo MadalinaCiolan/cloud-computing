@@ -10,7 +10,7 @@ const postsRoute = require('./routes/posts')
 const commentsRoute = require('./routes/comments')
 const likesRoute = require('./routes/likes')
 const dislikesRoute = require('./routes/dislikes')
-//const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
 
 // 2. Middleware
 app.use(bodyParser.json())
@@ -18,15 +18,15 @@ app.use('/posts', postsRoute)
 app.use('/comments', commentsRoute)
 app.use('/likes', likesRoute)
 app.use('/dislikes', dislikesRoute)
-//app.use('/user',userRoute)
+app.use('/user',authRoute)
 
 // 3. Create a route
 app.get('/', (req,res)=>{
     res.send('Welcome to Piazza System home page!')
 })
 
-const MURL = 'mongodb+srv://mada85nrg:1234@cluster0.7vwyr.mongodb.net/Piazza?retryWrites=true&w=majority&appName=Cluster0'
-mongoose.connect(MURL)
+//const MURL = 'mongodb+srv://mada85nrg:1234@cluster0.7vwyr.mongodb.net/Piazza?retryWrites=true&w=majority&appName=Cluster0'
+mongoose.connect(process.env.DB_CONNECTOR)
     .then(()=> console.log('Your mongoDB connector is on!'))
     .catch((err)=> console.error('Error connecting to MongoDB', err))
 

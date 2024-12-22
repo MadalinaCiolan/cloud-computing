@@ -4,9 +4,11 @@ const router = express.Router()
 const Comment = require('../models/Comment')
 const Interaction = require('../models/Interaction')
 const Action = require('../models/Action')
+const Post = require('../models/Post')
+const validate_token = require('../validations/validate_token')
 
-// POST (Create data)
-router.post('/', async (req, res) => {
+// POST (Create comment)
+router.post('/', validate_token, async (req, res) => {
     console.log("Request body: " + req.body)
     //try to insert
     try {
@@ -17,6 +19,14 @@ router.post('/', async (req, res) => {
         const savedComment = await commentData.save()
         // Then we create a new interaction for this particular comment that was saved
         const commentAction = await Action.findOne({ action_name: "Comment" })
+        // Find the post to get the post owner
+        const post = await Post.findOne({_id: req.body.post_id})
+        // Validate that the post is not expired
+        if(Date.now() >= Post.get_post_expiration_date(post)){
+            res.status(400).send({ message: 'Post has expired. No more comments are allowed' })
+            return
+        }
+        // If the post is not expired, then continue storing the interaction. Note that a user can comment on their own posts
         const interactionData = new Interaction({
             post_id: req.body.post_id,
             action_id: commentAction._id,
@@ -34,7 +44,7 @@ router.post('/', async (req, res) => {
 })
 
 //GET 1 (Read All comments for a given post_id)
-router.get('/', async (req, res) => {
+router.get('/', validate_token, async (req, res) => {
     try {
         let commentsArray = []
         // Get the Comment action id
