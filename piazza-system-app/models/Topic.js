@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 
 const TopicSchema = mongoose.Schema({
-    topic_category:{
+    topic_category: {
         type: String,
         required: true
     }
 })
 
-module.exports = mongoose.model('topics',TopicSchema)
+module.exports = mongoose.model('topics', TopicSchema)

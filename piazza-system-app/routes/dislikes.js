@@ -14,14 +14,14 @@ router.post('/', validate_token, async (req, res) => {
         // Get the Dislike action id
         const dislikeAction = await Action.findOne({ action_name: "Dislike" })
         // Find the post to get the post owner
-        const post = await Post.findOne({_id: req.body.post_id})
+        const post = await Post.findOne({ _id: req.body.post_id })
         // Validate that the post is not expired
-        if(Date.now() >= Post.get_post_expiration_date(post)){
+        if (Date.now() >= Post.get_post_expiration_date(post)) {
             res.status(400).send({ message: 'Post has expired. No more dislikes are allowed' })
             return
         }
         // Validate that the user wanting to dislike the post is not the owner
-        if(post.post_owner_id == req.body.user_id){
+        if (post.post_owner_id == req.body.user_id) {
             res.status(400).send({ message: 'A user cannot dislike their own posts' })
             return
         }

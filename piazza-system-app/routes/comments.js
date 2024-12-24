@@ -20,9 +20,9 @@ router.post('/', validate_token, async (req, res) => {
         // Then we create a new interaction for this particular comment that was saved
         const commentAction = await Action.findOne({ action_name: "Comment" })
         // Find the post to get the post owner
-        const post = await Post.findOne({_id: req.body.post_id})
+        const post = await Post.findOne({ _id: req.body.post_id })
         // Validate that the post is not expired
-        if(Date.now() >= Post.get_post_expiration_date(post)){
+        if (Date.now() >= Post.get_post_expiration_date(post)) {
             res.status(400).send({ message: 'Post has expired. No more comments are allowed' })
             return
         }

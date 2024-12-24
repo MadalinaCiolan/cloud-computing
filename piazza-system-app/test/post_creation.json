@@ -14,3 +14,24 @@
     "post_expiration_time": 10,
     "post_owner_id": "67615cbe185c5bf47933f234"
 }
+// query to search posts
+{
+    "topic_id": "6766f7e628eefa23f715e9ef",
+    "include_expired_posts": "yes",
+    "most_active_post": "yes"
+}
+// USer creation
+{
+    "user_name": "Olga",
+    "user_email": "olga@uni.com",
+    "user_password": "crappypassword"
+}
+
+{
+    "user_name": "Tom",
+    "user_email": "Tom@uni.com",
+    "user_password": "crappypassword2"
+}
+
+// Toms token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY4NTUzZTkzZTdhYjFjMjZjMzZlMTgiLCJpYXQiOjE3MzQ4OTE3MjR9.WOh83pAG59GFnThOe5sKIcDJCdWbMbTn-ae5vCOVYVE

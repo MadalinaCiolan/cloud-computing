@@ -10,7 +10,7 @@ const Action = require('../models/Action')
 const validate_token = require('../validations/validate_token')
 
 // POST (Create data)
-router.post('/', validate_token, async(req, res) => {
+router.post('/', validate_token, async (req, res) => {
     //console.log(req.body)
     // We need to do basic validation of the input here
 
@@ -38,7 +38,7 @@ router.get('/', validate_token, async (req, res) => {
     try {
         // Check if the request body is empty or if we need to do some filtering
         let postQuery = Post.find()
-        if(Object.keys(req.body).length !== 0){
+        if (Object.keys(req.body).length !== 0) {
             // We assume we will get the topic id that we need to filter on
             postQuery = postQuery.where("topic_id").equals(req.body.topic_id)
         }
@@ -70,7 +70,7 @@ router.get('/', validate_token, async (req, res) => {
                 else if (interaction.action_id == commentAction._id) {
                     // We assume there is no other interaction type so
                     const comment = await Comment.findOne({ _id: interaction.comment_id })
-                    const commentUser = await User.findOne({_id: interaction.user_id})
+                    const commentUser = await User.findOne({ _id: interaction.user_id })
                     commentList.push({
                         user_id: interaction.user_id,
                         user_name: commentUser.user_name,
@@ -91,17 +91,17 @@ router.get('/', validate_token, async (req, res) => {
 
             // Check if we need to filter expired posts or not
             let includePostInResults = false
-            if(Object.keys(req.body).length === 0 || req.body.include_expired_posts === "yes"){
+            if (Object.keys(req.body).length === 0 || req.body.include_expired_posts === "yes") {
                 includePostInResults = true
             }
-            else{
+            else {
                 // Only include the result if the post is still live
-                if(postStatus == "Live"){
+                if (postStatus == "Live") {
                     includePostInResults = true
                 }
             }
             // Push the post in the result array if it complies with the conditions
-            if(includePostInResults){
+            if (includePostInResults) {
                 postResponseArray.push({
                     post_id: post._id,
                     post_title: post.post_title,
@@ -116,16 +116,16 @@ router.get('/', validate_token, async (req, res) => {
                     post_comments: commentList
                 })
             }
-            
+
         }
 
         // Check if we need to return only the most active post i.e.  the one with most likes and dislikes altogether
-        if(Object.keys(req.body).length !== 0 && req.body.most_active_post === "yes"){
+        if (Object.keys(req.body).length !== 0 && req.body.most_active_post === "yes") {
             postResponseArray = postResponseArray.reduce((max, obj) => {
                 const combinedValue = obj.post_likes + obj.post_dislikes
                 return combinedValue > (max.post_likes + max.post_dislikes) ? obj : max
-              })
-        }    
+            })
+        }
 
         res.send(postResponseArray)
     } catch (err) {
