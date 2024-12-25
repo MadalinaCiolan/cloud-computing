@@ -29,6 +29,7 @@ const PostSchema = mongoose.Schema(
     }
 );
 
+// Receives a Post object. Returns a Date object that represent the post expiration date
 function get_post_expiration_date(post) {
     const expirationDate = new Date(post.post_creation_ts);
     expirationDate.setMinutes(

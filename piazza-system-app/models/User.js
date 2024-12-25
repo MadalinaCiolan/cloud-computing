@@ -20,8 +20,9 @@ const UserSchema = mongoose.Schema({
         max: 1024
     }
 },
-    {
-        timestamps: { createdAt: "user_creation_ts", updatedAt: "user_update_ts" }
-    })
+//Functionality from mongoose package to provide timestamps option
+{
+    timestamps: { createdAt: "user_creation_ts", updatedAt: "user_update_ts" }
+})
 
 module.exports = mongoose.model('user', UserSchema)

@@ -20,7 +20,7 @@ app.use('/likes', likesRoute)
 app.use('/dislikes', dislikesRoute)
 app.use('/user', authRoute)
 
-// 3. Create a route
+// 3. Create routes
 app.get('/', (req, res) => {
     res.send('Welcome to Piazza System home page!')
 })

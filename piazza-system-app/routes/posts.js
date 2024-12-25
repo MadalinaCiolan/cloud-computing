@@ -11,10 +11,8 @@ const validate_token = require('../validations/validate_token')
 
 // POST (Create data)
 router.post('/', validate_token, async (req, res) => {
-    //console.log(req.body)
-    // We need to do basic validation of the input here
 
-    // Now we construct the past that will be stored
+    // We construct the post that will be stored
     const postData = new Post({
         post_title: req.body.post_title,
         topic_id: req.body.topic_id,
@@ -33,7 +31,7 @@ router.post('/', validate_token, async (req, res) => {
 
 })
 
-//GET 2 (Read by ID)
+//GET (Read by ID)
 router.get('/', validate_token, async (req, res) => {
     try {
         // Check if the request body is empty or if we need to do some filtering
@@ -46,7 +44,7 @@ router.get('/', validate_token, async (req, res) => {
         // Execute the query
         const postList = await postQuery
 
-        // Atrart bulding ythe reply object
+        // Start bulding the reply object
         let postResponseArray = []
 
         // Get the general interaction information that we will be looking for in the posts
@@ -55,7 +53,7 @@ router.get('/', validate_token, async (req, res) => {
         const commentAction = await Action.findOne({ action_name: "Comment" })
 
         for await (const post of postList) {
-            // GEt interaction information
+            // Get interaction information
             const postInteractions = await Interaction.find({ post_id: post._id })
             let numberOfLikes = 0
             let numberOfDislikes = 0
