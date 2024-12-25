@@ -27,11 +27,45 @@
     "user_password": "crappypassword"
 }
 
+// Olga token
 {
-    "user_name": "Tom",
-    "user_email": "Tom@uni.com",
+    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY4NTQ2MTkzZTdhYjFjMjZjMzZlMTUiLCJpYXQiOjE3MzUxMzE2MTR9.McIKNoGFy_Ha4SCbPtOJcJh90i3B7SzT4VhbgStai8w"
+}
+
+{
+    "user_name": "Mary",
+    "user_email": "mary@uni.com",
     "user_password": "crappypassword2"
 }
 
-// Toms token
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY4NTUzZTkzZTdhYjFjMjZjMzZlMTgiLCJpYXQiOjE3MzQ4OTE3MjR9.WOh83pAG59GFnThOe5sKIcDJCdWbMbTn-ae5vCOVYVE
+// MAry token
+{
+    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY4NTUzZTkzZTdhYjFjMjZjMzZlMTgiLCJpYXQiOjE3MzUxMzE3Mjd9.3rsIcYlYlrSMUrLMk_AzDHCWmIGw_BRVA1x0LwgifcM"
+}
+
+{
+    "user_name": "Nick",
+    "user_email": "nick@uni.com",
+    "user_password": "password3"
+}
+
+// Nick token
+{
+    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzZjMDAyZDA2OTk0NjczNmUxMGZlOTIiLCJpYXQiOjE3MzUxMzE4MDZ9.RNb_mk0wNJ_AK3_-tX3kBuLfIstPOI3VNzNiFFSPsic"
+}
+
+{
+    "user_name": "Nestor",
+    "user_email": "nestor@uni.com",
+    "user_password": "password2"
+}
+
+// Nestor token
+{
+    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzZjMDAwYjA2OTk0NjczNmUxMGZlOGYiLCJpYXQiOjE3MzUxMzE4NjB9.9wlBxlWv14kz2meMeMBuYHJfJbXRR1z6m17inEnJ9iQ"
+}
+
+// Browse posts in topic category
+{
+    "topic_id": "6766f80ebff31c770e1e9ea5"
+}

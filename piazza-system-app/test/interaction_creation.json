@@ -3,3 +3,47 @@
     "post_id": "6766f26b20f40ff5aa9b9466",
     "user_id": "6766fc7bf53254823891b7b9"
   }
+
+
+
+  [
+    {
+        "post_id": "676c050f069946736e10fea5",
+        "post_title": "New iPhone 75 has been just released",
+        "post_topic": "Tech",
+        "post_time_stamp": "2024-12-25T13:13:51.833Z",
+        "post_message_body": "The latest iPhone 75 has been released with Apple Intelligence model T800",
+        "post_expiration_time": 5,
+        "post_status": "Expired",
+        "post_owner_name": "Olga",
+        "post_likes": 0,
+        "post_dislikes": 0,
+        "post_comments": []
+    },
+    {
+        "post_id": "676c07d8069946736e10fef6",
+        "post_title": "New Lenovo tablet does not get solid reviews",
+        "post_topic": "Tech",
+        "post_time_stamp": "2024-12-25T13:25:44.445Z",
+        "post_message_body": "The new Yoga LEnovo tablet seems to be a dud",
+        "post_expiration_time": 120,
+        "post_status": "Live",
+        "post_owner_name": "Nick",
+        "post_likes": 0,
+        "post_dislikes": 0,
+        "post_comments": []
+    },
+    {
+        "post_id": "676c084d069946736e10fef8",
+        "post_title": "Terminators are being developed in China",
+        "post_topic": "Tech",
+        "post_time_stamp": "2024-12-25T13:27:41.302Z",
+        "post_message_body": "An army of terminator-like robots are being developed in china to rival Tesla.",
+        "post_expiration_time": 120,
+        "post_status": "Live",
+        "post_owner_name": "Mary",
+        "post_likes": 0,
+        "post_dislikes": 0,
+        "post_comments": []
+    }
+]
