@@ -10,11 +10,9 @@ const Action = require('../models/Action')
 const validate_token = require('../validations/validate_token')
 
 // POST (Create data)
-router.post('/', validate_token, async(req, res) => {
-    //console.log(req.body)
-    // We need to do basic validation of the input here
+router.post('/', validate_token, async (req, res) => {
 
-    // Now we construct the past that will be stored
+    // We construct the post that will be stored
     const postData = new Post({
         post_title: req.body.post_title,
         topic_id: req.body.topic_id,
@@ -33,12 +31,12 @@ router.post('/', validate_token, async(req, res) => {
 
 })
 
-//GET 2 (Read by ID)
+//GET (Read by ID)
 router.get('/', validate_token, async (req, res) => {
     try {
         // Check if the request body is empty or if we need to do some filtering
         let postQuery = Post.find()
-        if(Object.keys(req.body).length !== 0){
+        if (Object.keys(req.body).length !== 0) {
             // We assume we will get the topic id that we need to filter on
             postQuery = postQuery.where("topic_id").equals(req.body.topic_id)
         }
@@ -46,7 +44,7 @@ router.get('/', validate_token, async (req, res) => {
         // Execute the query
         const postList = await postQuery
 
-        // Atrart bulding ythe reply object
+        // Start bulding the reply object
         let postResponseArray = []
 
         // Get the general interaction information that we will be looking for in the posts
@@ -55,7 +53,7 @@ router.get('/', validate_token, async (req, res) => {
         const commentAction = await Action.findOne({ action_name: "Comment" })
 
         for await (const post of postList) {
-            // GEt interaction information
+            // Get interaction information
             const postInteractions = await Interaction.find({ post_id: post._id })
             let numberOfLikes = 0
             let numberOfDislikes = 0
@@ -70,7 +68,7 @@ router.get('/', validate_token, async (req, res) => {
                 else if (interaction.action_id == commentAction._id) {
                     // We assume there is no other interaction type so
                     const comment = await Comment.findOne({ _id: interaction.comment_id })
-                    const commentUser = await User.findOne({_id: interaction.user_id})
+                    const commentUser = await User.findOne({ _id: interaction.user_id })
                     commentList.push({
                         user_id: interaction.user_id,
                         user_name: commentUser.user_name,
@@ -91,17 +89,17 @@ router.get('/', validate_token, async (req, res) => {
 
             // Check if we need to filter expired posts or not
             let includePostInResults = false
-            if(Object.keys(req.body).length === 0 || req.body.include_expired_posts === "yes"){
+            if (Object.keys(req.body).length === 0 || req.body.include_expired_posts === "yes") {
                 includePostInResults = true
             }
-            else{
+            else {
                 // Only include the result if the post is still live
-                if(postStatus == "Live"){
+                if (postStatus == "Live") {
                     includePostInResults = true
                 }
             }
             // Push the post in the result array if it complies with the conditions
-            if(includePostInResults){
+            if (includePostInResults) {
                 postResponseArray.push({
                     post_id: post._id,
                     post_title: post.post_title,
@@ -116,16 +114,16 @@ router.get('/', validate_token, async (req, res) => {
                     post_comments: commentList
                 })
             }
-            
+
         }
 
         // Check if we need to return only the most active post i.e.  the one with most likes and dislikes altogether
-        if(Object.keys(req.body).length !== 0 && req.body.most_active_post === "yes"){
+        if (Object.keys(req.body).length !== 0 && req.body.most_active_post === "yes") {
             postResponseArray = postResponseArray.reduce((max, obj) => {
                 const combinedValue = obj.post_likes + obj.post_dislikes
                 return combinedValue > (max.post_likes + max.post_dislikes) ? obj : max
-              })
-        }    
+            })
+        }
 
         res.send(postResponseArray)
     } catch (err) {

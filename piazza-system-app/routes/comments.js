@@ -20,9 +20,9 @@ router.post('/', validate_token, async (req, res) => {
         // Then we create a new interaction for this particular comment that was saved
         const commentAction = await Action.findOne({ action_name: "Comment" })
         // Find the post to get the post owner
-        const post = await Post.findOne({_id: req.body.post_id})
+        const post = await Post.findOne({ _id: req.body.post_id })
         // Validate that the post is not expired
-        if(Date.now() >= Post.get_post_expiration_date(post)){
+        if (Date.now() >= Post.get_post_expiration_date(post)) {
             res.status(400).send({ message: 'Post has expired. No more comments are allowed' })
             return
         }
@@ -49,7 +49,7 @@ router.get('/', validate_token, async (req, res) => {
         let commentsArray = []
         // Get the Comment action id
         const commentAction = await Action.findOne({ action_name: "Comment" })
-        // We find all the interactions that are of type fomment for a particular post
+        // We find all the interactions that are of type comment for a particular post
         const interactionsList = await Interaction.find({ post_id: req.body.post_id, action_id: commentAction._id })
         for (const interaction of interactionsList) {
             const comment = await Comment.findOne({ _id: interaction.comment_id })
